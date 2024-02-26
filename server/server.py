@@ -1,5 +1,6 @@
 import threading
 import socket
+from colorama import Fore
 
 
 class Server:
@@ -32,15 +33,16 @@ class Server:
                 break
 
     def receive_connections(self):
+        print("Server is listening for connections...")
         while True:
-            print("Server is listening for connections...")
             client, addr = self.server.accept()
             self.client_addrs.append(client)
             print("Connection established from {}".format(str(addr)))
+            # print(Fore.RED + "Hello" + Fore.GREEN + " World")
             client.send('Welcome to chat!'.encode('utf-8'))
             nickname = client.recv(512)
             self.aliases.append(nickname)
-            self.send_message_to_clients('{} has joined the chat!'.format(nickname).encode('utf-8'))
+            self.send_message_to_clients('{} has joined the chat!'.format(nickname.decode('utf 8')).encode('utf-8'))
             self.create_thread_for_client(client)
 
     def create_thread_for_client(self, client):
@@ -51,6 +53,7 @@ class Server:
 def main():
     server = Server()
     server.receive_connections()
+
 
 if __name__ == "__main__":
     main()

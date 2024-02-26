@@ -1,5 +1,6 @@
 import threading
 import socket
+import colorama
 
 
 class Client:
@@ -27,7 +28,7 @@ class Client:
 
     def client_send(self):
         while True:
-            message = self.alias + input(": ")
+            message = self.alias + ": " + input("")
             self.client.send(message.encode('utf-8'))
 
     def create_thread_for_client(self):
