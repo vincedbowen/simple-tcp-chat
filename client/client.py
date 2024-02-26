@@ -1,5 +1,6 @@
 import threading
 import socket
+# from txt_colors.colors import get_random_color
 
 
 class Client:
@@ -8,6 +9,7 @@ class Client:
         self.client = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
         self.connect()
         self.create_thread_for_client()
+        # self.txt_color = get_random_color()
 
     def connect(self):
         self.client.connect(('::1', 8080))

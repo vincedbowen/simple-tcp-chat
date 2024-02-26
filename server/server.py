@@ -1,5 +1,7 @@
 import threading
 import socket
+# from txt_colors.colors import get_random_color
+from colorama import init
 
 
 class Server:
@@ -13,6 +15,9 @@ class Server:
         self.server.listen()
         self.client_addrs = []
         self.aliases = []
+        # self.txt_color = get_random_color()
+        init(autoreset=True)
+        print("Server started. Type q to exit.")
 
     def send_message_to_clients(self, message):
         for client in self.client_addrs:
@@ -37,7 +42,6 @@ class Server:
             client, addr = self.server.accept()
             self.client_addrs.append(client)
             print("Connection established from {}".format(str(addr)))
-            # print(Fore.RED + "Hello" + Fore.GREEN + " World")
             client.send('Welcome to chat!'.encode('utf-8'))
             nickname = client.recv(512)
             self.aliases.append(nickname)
@@ -52,7 +56,6 @@ class Server:
 def main():
     server = Server()
     server.receive_connections()
-
 
 if __name__ == "__main__":
     main()
