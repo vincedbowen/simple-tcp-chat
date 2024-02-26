@@ -1,6 +1,5 @@
 import threading
 import socket
-from colorama import Fore
 
 
 class Server:
